@@ -143,7 +143,7 @@ class TestAccountService(TestCase):
         data = response.get_json()
         self.assertEqual(len(data), 5)
 
-  def test_read_account(self):
+    def test_read_account(self):
         """It should Get Account"""
         test_account = AccountFactory()
         resp = self.client.post(
@@ -155,7 +155,7 @@ class TestAccountService(TestCase):
         response = self.client.get(f"{BASE_URL}/{test_account['id']}")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-  def test_update_account(self):
+    def test_update_account(self):
         """It should Update an existing Account"""
         # create an Account to update
         test_account = AccountFactory()
@@ -169,13 +169,13 @@ class TestAccountService(TestCase):
         updated_account = resp.get_json()
         self.assertEqual(updated_account["name"], "Something Known")
 
-  def test_delete_account(self):
+    def test_delete_account(self):
         """It should Delete Account"""  
         account = self._create_accounts(1)[0]
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
 
-  def test_get_account_not_found(self):
+    def test_get_account_not_found(self):
         """It should not Read an Account that is not found"""
         resp = self.client.get(f"{BASE_URL}/0")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
